@@ -1,0 +1,5 @@
+<?php
+
+function ckeditor_timestamp_init() {
+	drupal_add_js(drupal_get_path('module', 'ckeditor_timestamp') .'/ckeditor_timestamp.js', array('weight' => 0));
+}
