@@ -1,0 +1,4 @@
+name = CKEditor Timestamp
+description = Sets CKEDITOR.timestamp everytime the page is reloaded to ensure only non cached CKE CSS and JS to be loaded
+core = 7.x
+package = Custom
