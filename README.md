@@ -1,13 +1,16 @@
 # Drupal CKEditor CSS and JS Timestamp Query Module
 
-Small Drupal module to solve CKEditor's cache issue by refreshing its timestamp that is added as query to every custom CKE CSS and JS on page reload.
+Small Drupal module to solve CKEditor's cache issue by refreshing the timestamp that is added as query to every custom CKE CSS and JS on page reload.
 
-All it does is loading a small JS before any other CKEditor JS is loaded where I set <code>CKEDITOR.timestamp = +new Date</code>. That timestamp then is appended to the CKE files you are developing and will be refreshed every time you reload the browser which then loads only the freshest custom CKE JS and CSS.
+All this module does is to load a small JS before any other CKEditor JS is loaded to append a new timestamp query every time you clear Drupal cache, so  only the freshest custom CKE JS and CSS get loaded.
 
-Download, enable, refresh your page and see how the timestamp is queried to your CKEditor files to finally load your updated files during development.
+Download, enable, clear the cache and see how the timestamp is queried to your CKEditor files to finally load your updated files during development.
 
 Thanks @affective
 http://ckeditor.com/forums/CKEditor/Problem-with-config.js-not-updating
+Thanks (@tedforgive)[https://github.com/tedfordgif]
+for implementing (hook_flush_caches())[https://api.drupal.org/api/drupal/modules%21system%21system.api.php/function/hook_flush_caches/7]
+
 
 Maybe solves the following issues
 - https://www.drupal.org/node/2330515
