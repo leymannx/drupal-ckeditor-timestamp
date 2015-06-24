@@ -8,6 +8,7 @@ Download, enable, clear the cache and see how the timestamp is queried to your C
 
 Thanks @affective
 - http://ckeditor.com/forums/CKEditor/Problem-with-config.js-not-updating
+
 Thanks [@tedforgive](https://github.com/tedfordgif)
 - for implementing [hook_flush_caches()](https://api.drupal.org/api/drupal/modules%21system%21system.api.php/function/hook_flush_caches/7)
 
