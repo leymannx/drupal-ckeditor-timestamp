@@ -1,5 +1,27 @@
 <?php
 
+/**
+ * @file
+ * Handles setting the variable and JS settings for CKEditor timestamp.
+ */
+
+/**
+ * Implements hook_init().
+ *
+ * Adds JS to configure CKEditor timestamp.
+ */
 function ckeditor_timestamp_init() {
-	drupal_add_js(drupal_get_path('module', 'ckeditor_timestamp') .'/ckeditor_timestamp.js', array('weight' => 0));
+  if (!user_is_anonymous()) {
+    drupal_add_js(array('ckeditor_timestamp' => array('timestamp' => variable_get('ckeditor_timestamp', 'ABCD'))), 'setting');
+    drupal_add_js(drupal_get_path('module', 'ckeditor_timestamp') . '/ckeditor_timestamp.js', array('weight' => 0));
+  }
+}
+	
+/**
+ * Implements hook_flush_caches().
+ *
+ * Resets CKEditor timestamp variable.
+ */
+function ckeditor_timestamp_flush_caches() {
+  variable_set('ckeditor_timestamp', time());
 }
