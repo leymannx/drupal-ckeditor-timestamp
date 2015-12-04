@@ -16,7 +16,7 @@ function ckeditor_timestamp_init() {
     drupal_add_js(drupal_get_path('module', 'ckeditor_timestamp') . '/ckeditor_timestamp.js', array('weight' => 0));
   }
 }
-	
+
 /**
  * Implements hook_flush_caches().
  *
@@ -24,4 +24,32 @@ function ckeditor_timestamp_init() {
  */
 function ckeditor_timestamp_flush_caches() {
   variable_set('ckeditor_timestamp', time());
+}
+
+/**
+ * Implement hook_js_alter().
+ */
+function ckeditor_timestamp_js_alter(&$js) {
+  if (user_is_anonymous()) {
+    return;
+  }
+
+  $ckeditor_path = ckeditor_path('url') . '/ckeditor.js';
+  $tstamp_path = drupal_get_path('module', 'ckeditor_timestamp') . '/ckeditor_timestamp.js';
+  $reordered = array();
+
+  foreach ($js as $path => $data) {
+    if ($path === $tstamp_path) {
+      continue;
+    }
+
+    $reordered[$path] = $data;
+
+    if ($path === $ckeditor_path) {
+      $reordered[$tstamp_path] = $js[$tstamp_path];
+      $reordered[$tstamp_path]['scope'] = 'footer';
+    }
+  }
+
+  $js = $reordered;
 }
